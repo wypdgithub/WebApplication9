@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React 实例</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        @*class Clock extends React.Component {
+        render() {
+        return (
+        <div>
+            <h1>Hello, world!</h1>
+            <h2>现在是 {this.props.date.toLocaleTimeString()}.</h2>
+        </div>
+        );
+        }
+        }
+
+        function tick() {
+        ReactDOM.render(
+        <Clock date={new Date()} />,
+        document.getElementById('example')
+        );
+        }*@
+        class Message extends React.Component {
+        constructor(props) {
+        super(props);
+
+        this.state = {
+        msgs: []
+        };
+        }
+        componentDidMount() {
+        setTimeout(() => {
+        this.setState({
+        msgs: [{
+        id: '1',
+        content: '我是消息我是消息我是消息',
+        time: '2018-11-23 12:33:44',
+        userName: '王羲之'
+        }, {
+        id: '2',
+        content: '我是消息我是消息我是消息2',
+        time: '2018-11-23 12:33:45',
+        userName: '王博之'
+        }, {
+        id: '3',
+        content: '我是消息我是消息我是消息3',
+        time: '2018-11-23 12:33:44',
+        userName: '王安石'
+        }, {
+        id: '4',
+        content: '我是消息我是消息我是消息45',
+        time: '2018-11-23 12:33:45',
+        userName: '王明'
+        }]
+        });
+        }, 1000);
+        }
+
+        // 消息已阅
+        msgRead(id, e) {
+        let msgs = this.state.msgs;
+        let itemIndex = msgs.findIndex(item => item.id === id);
+
+        if (itemIndex !== -1) {
+        msgs.splice(itemIndex, 1);
+
+        this.setState({
+        msgs
+        });
+        }
+        }
+
+        render() {
+        return (
+        <div>
+            <h4>消息列表</h4>
+            <div className="msg-items">
+                {
+                this.state.msgs.map(item => {
+                return (
+                <div key={item.id} className="msg-item">
+                    <p className="msg-item__header">{item.userName} - {item.time}</p>
+                    <p className="msg-item__content">{item.content}</p>
+                    <a href="javascript:;" className="msg-item__read" onClick={this.msgRead.bind(this, item.id)}>×</a>
+                </div>
+                )
+                })
+                }
+            </div>
+        </div>
+        )
+        }
+        }
+        function tick() {
+        ReactDOM.render(
+        document.getElementById('example')
+        );
+        }
+    </script>
+
+</body>
+
+</html>
