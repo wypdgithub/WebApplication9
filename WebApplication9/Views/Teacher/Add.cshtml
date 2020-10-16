@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ITAEM</title>
+    <title>React 实例</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="~/js/layui.js"></script>
+    <link href="~/js/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="cun"></div>
+    <script type="text/babel">
+        class CrudComponent extends React.Component{
+        constructor(props){
+        super(props)
+        this.state={
+        users:{}
+        }
+        }
+
+        addUser(){
+        var teaName=this.teaName.value;
+        var organizationName=this.organizationName.value;
+        var teaImg=this.teaImg.value;
+        this.state.users=teaName;
+        console.log(this.state.users);
+        @*const insertUser="http://localhost:62023/api/Some/Add?name="+this.name.value+"&age="+this.age.value
+        fetch(insertUser,{method:"post"})
+        .then(responseType=>responseType.stringify(obj))*@
+        fetch('http://localhost:62023/api/Teacher/Add', {
+        method: 'POST',
+        body: JSON.stringify({
+        teaName,
+        organizationName,
+        teaImg
+        }),
+        headers: { 'content-type': 'application/json'}})
+        .then(res => res.json())
+        .then(console.log)
+        .then(data=>{
+        console.log(data)
+        })
+        window.location.href="http://localhost:57251/Teacher/GetList"
+        }
+
+        render(){
+        return (
+        <div>
+            <fieldset className="layui-elem-field">
+                <div className="layui-field-box">
+                    <div className="layui-row layui-col-space2">
+                        <div className="layui-col-md1">
+                            <span>用户名</span>
+                            <input type="text" id="userName" name="teaName" required lay-verify="required"  placeholder="请输入用户名" className="layui-input" ref={teaName =>this.teaName=teaName} />
+                        </div>
+
+                        <hr className="layui-bg-green" />
+
+                        <div className="layui-col-md1">
+                            <span>年龄</span>
+                            <input type="text" id="password" name="organizationName" required lay-verify="required" placeholder="请输入年龄" className="layui-input" ref={organizationName =>this.organizationName=organizationName} />
+                        </div>
+                        <hr className="layui-bg-green" />
+                        <div className="layui-col-md1">
+                            <span>教师头像</span>
+                            <input type="file" id="password" name="teaImg" required lay-verify="required" placeholder="请输入年龄"  ref={teaImg =>this.teaImg=teaImg} />
+                        </div>
+                        <hr className="layui-bg-green" />
+
+                        <div className="layui-col-md1">
+                            <button id="btn2" className="layui-btn" onClick={this.addUser.bind(this)}>
+                                <i className="layui-icon">&#xe608;</i>添加
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        )
+        }
+        }
+        ReactDOM.render(
+        <CrudComponent />,document.getElementById("cun"))
+    </script>
+</body>
+</html>
+
+

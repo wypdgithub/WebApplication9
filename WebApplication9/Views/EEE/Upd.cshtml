@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewData["Title"] = "Upd";
+}
+
+<h1>Upd</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ITAEM</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="~/js/layui.js"></script>
+    <link href="~/js/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="cun"></div>
+    <script type="text/babel">
+        class CrudComponent extends React.Component{
+        constructor(props){
+        super(props)
+        this.state={
+        users:{}
+        }
+        }
+        componentDidMount () {
+        var userId = @ViewBag.id;
+        alert(userId);
+        const getUserByUserId="http://localhost:62023/api/Some/Find?id="+@ViewBag.id
+        fetch(getUserByUserId,{method:"GET"})
+        .then(response=>response.json())
+        .then(data=>{
+        console.log(data[0])
+        this.id.value=data[0].id
+        this.name.value=data[0].name
+        this.age.value=data[0].age
+        })
+        }
+        @*const getUserByUserId="http://localhost:62023/api/Some/UpdEmp?id="+this.id.value*@
+        updateUser(){
+        @*var Name=this.name.value;
+        var Age=this.age.value;
+        const getUserByUserId="http://localhost:62023/api/Some/UpdEmp?id="+this.id.value
+        fetch(getUserByUserId,{method:"post"})
+        body: JSON.stringify({
+        Name,
+        Age
+        }),
+        headers: { 'content-type': 'application/json'}})
+        .then(data=>{
+        console.log(data)
+        })*@
+        var Id=this.id.value;
+        var Name=this.name.value;
+        var Age=this.age.value;
+        this.state.users=Name;
+        console.log(this.state.users);
+        @*const insertUser="http://localhost:62023/api/Some/Add?name="+this.name.value+"&age="+this.age.value
+        fetch(insertUser,{method:"post"})
+        .then(responseType=>responseType.stringify(obj))*@
+        fetch('http://localhost:62023/api/Some/UpdEmp', {
+        method: 'POST',
+        body: JSON.stringify({
+        Id,
+        Name,
+        Age
+        }),
+        headers: { 'content-type': 'application/json'}})
+        .then(res => res.json())
+        .then(console.log)
+        alert("修改成功")
+        window.location.href="http://localhost:57251/EEE/aa"
+        }
+
+        render(){
+        return (
+        <div>
+            <fieldset className="layui-elem-field">
+                <legend>Update User</legend>
+                <div className="layui-field-box">
+                    <div className="layui-row layui-col-space2">
+
+                        <div className="layui-col-md1">
+                            <input type="text" id="id" name="id" required lay-verify="required" placeholder="id" className="layui-input" ref={id =>this.id=id} disabled="true" />
+                        </div>
+
+                        <hr className="layui-bg-green" />
+
+                        <div className="layui-col-md1">
+                            <input type="text" id="userName" name="name" required lay-verify="required" placeholder="用户名" className="layui-input" ref={name =>this.name=name} />
+                        </div>
+
+                        <hr className="layui-bg-green" />
+
+                        <div className="layui-col-md1">
+                            <input type="text" id="password" name="age" required lay-verify="required" placeholder="年龄" className="layui-input" ref={age =>this.age=age} />
+                        </div>
+
+                        <hr className="layui-bg-green" />
+
+                        <div className="layui-col-md1">
+                            <button id="btn2" className="layui-btn" onClick={this.updateUser.bind(this)}>
+                                <i className="layui-icon">&#xe642;</i>修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        )
+        }
+        }
+        ReactDOM.render(
+        <CrudComponent />,document.getElementById("cun"))
+    </script>
+</body>
+</html>

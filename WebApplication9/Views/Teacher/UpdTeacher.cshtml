@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "UpdTeacher";
+    Layout = null;
+}
+&nbsp;&nbsp;&nbsp;&nbsp;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ITAEM</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="~/js/layui.js"></script>
+    <link href="~/js/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="cun"></div>
+    <script type="text/babel">
+        class CrudComponent extends React.Component{
+        constructor(props){
+        super(props)
+        this.state={
+        users:{}
+        }
+        }
+        componentDidMount () {
+        var userId = @ViewBag.sid;
+        const getUserByUserId="http://localhost:62023/api/Teacher/Find?id="+@ViewBag.sid
+        fetch(getUserByUserId,{method:"GET"})
+        .then(response=>response.json())
+        .then(data=>{
+        console.log(data[0])
+        this.id.value=data[0].id
+        this.teaName.value=data[0].teaName
+        this.organizationName.value=data[0].organizationName
+        })
+        }
+
+        updateUser(){
+        var Id=this.id.value;
+        var teaName=this.teaName.value;
+        var organizationName=this.organizationName.value;
+        this.state.users=teaName;
+        console.log(this.state.users)
+        fetch('http://localhost:62023/api/Teacher/UpdTeacher', {
+        method: 'POST',
+        body: JSON.stringify({
+        Id,
+        teaName,
+        organizationName
+        }),
+        headers: { 'content-type': 'application/json'}})
+        .then(res => res.json())
+        .then(console.log)
+        @*alert("修改成功")*@
+        window.location.href="http://localhost:57251/Teacher/GetList"
+        }
+
+        render(){
+        return (
+        <div>
+            <h1>修改教师</h1>
+            <fieldset className="layui-elem-field">
+                <div className="layui-field-box">
+                    <div className="layui-row layui-col-space2">
+
+                        <div className="layui-col-md1">
+                            <input type="text" id="id" name="id" required lay-verify="required" placeholder="id" className="layui-input" ref={id =>this.id=id} disabled="true" />
+                        </div>
+
+                        <hr className="layui-bg-green" />
+
+                        <div className="layui-col-md1">
+                            <input type="text" id="userName" name="teaName" required lay-verify="required" placeholder="用户名" className="layui-input" ref={teaName =>this.teaName=teaName} />
+                        </div>
+
+                        <hr className="layui-bg-green" />
+
+                        <div className="layui-col-md1">
+                            <input type="text" id="password" name="organizationName" required lay-verify="required" placeholder="机构名称" className="layui-input" ref={organizationName =>this.organizationName=organizationName} />
+                        </div>
+
+                        <hr className="layui-bg-green" />
+
+                        <div className="layui-col-md1">
+                            <button id="btn2" className="layui-btn" onClick={this.updateUser.bind(this)}>
+                                <i className="layui-icon">&#xe642;</i>修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        )
+        }
+        }
+        ReactDOM.render(
+        <CrudComponent />,document.getElementById("cun"))
+    </script>
+</body>
+</html>

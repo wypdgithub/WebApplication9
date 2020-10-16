@@ -4,29 +4,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication9.Controllers
+namespace WebApplication9.Controllers.Teachers
 {
-    public class EEEController : Controller
+    public class TeacherController : Controller
     {
-        public IActionResult Index()
+        public IActionResult GetList()
         {
             return View();
         }
-        public IActionResult aa()
-        {
-            return View();
-        }
-        public IActionResult dd()
-        {
-            return View();
-        } 
         public IActionResult Add()
         {
             return View();
         }
-        public IActionResult Upd(int id)
+        public IActionResult Upd()
         {
-             ViewBag.id=id;
+            
+            return View();
+        }
+        public IActionResult UpdTeacher(int id)
+        {
+            ViewBag.sid = id;
+            return View();
+        }
+        public IActionResult LLL()
+        {
+            
             return View();
         }
     }

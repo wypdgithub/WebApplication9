@@ -1,13 +1,13 @@
 ﻿
 @{
-    ViewData["Title"] = "aa";
+    ViewData["Title"] = "dd";
 }
 
+<h1>dd</h1>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>React 实例</title>
+    <meta charset="UTF-8">
     <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
     <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
     <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
@@ -15,7 +15,6 @@
     <link href="~/js/layui.css" rel="stylesheet" />
 </head>
 <body>
-    
     <div id="cun"></div>
     <script type="text/babel">
         class CrudComponent extends React.Component{
@@ -36,9 +35,8 @@
         })
         })
         }
-
         getUserByUserName(){
-        const getUserByUserName="http://localhost:62023/api/Some/Show?Ename="+this.text1.value
+        const getUserByUserName="http://120.79.197.130/crudTest-0.0.1-SNAPSHOT/user/getUserByUserName/"+this.text1.value
         fetch(getUserByUserName,{method:"GET"})
         .then(response=>response.json())
         .then(data=>{
@@ -48,36 +46,24 @@
         })
         })
         }
-
-       
-
         deleteUserById(id,name){
         if(window.confirm("确定要删除 "+name+" 吗？")){
-        const heroesProps = this.props.user;
-
         const getUserById="http://localhost:62023/api/Some/UpdState?id="+id
-        fetch(getUserById,{method:"GET"})
+        fetch(getUserById,{method:"DELETE"})
         .then(response=>response.json())
         .then(data=>{
-        @*console.log(data)
-        console.log(this.state.users)*@
-        @*this.setState({
-        users:this.state.users
-        })*@
+        
+        
         })
         }
-        alert("删除成功")
-        window.location.href="http://localhost:57251/EEE/aa"
-        }
 
-        updateUser(id){
-        window.location.href="http://localhost:57251/EEE/Upd?id="+id
         }
-
         addUser(){
-        window.location.href="http://localhost:57251/EEE/Add"
+        window.location.href="http://localhost:63342/ReacTest/pageTest/10.CRUD.add.html?_ijt=ti5s31h50tdkekgf4ivl57dd48"
         }
-
+        updateUser(id){
+        window.location.href="http://localhost:63342/ReacTest/pageTest/10.CRUD.update.html?_ijt=ot6mkr486r7iothtqcfcbmvo44#"+id
+        }
         render(){
         return (
         <div>
@@ -91,12 +77,6 @@
                     </button>
                 </div>
             </div>
-            <button className="layui-btn layui-btn-danger" onClick={this.componentDidMount.bind(this)}>
-                <i className="layui-icon">&#xe640;</i>刷新
-            </button>
-            <button className="layui-btn layui-btn-warm" onClick={this.addUser.bind(this)}>
-                <i className="layui-icon">&#xe654;</i> 添加
-            </button>
             <table className="layui-table">
                 <thead>
                     <tr>
@@ -110,7 +90,7 @@
                 <tbody>
                     {
                     this.state.users.map(
-                    (user,index) =>
+                    (user, index) =>
                     <tr key={user.id}>
                         <td>{user.id}</td>
                         <td>{user.name}</td>
@@ -125,11 +105,15 @@
                                 <i className="layui-icon">&#xe640;</i>删除
                             </button>
                         </td>
-                    </tr>
-                    )
+                    </tr>)
                     }
                 </tbody>
             </table>
+
+            <button className="layui-btn layui-btn-warm" onClick={this.addUser.bind(this)}>
+                <i className="layui-icon">&#xe654;</i> 添加
+            </button>
+
         </div>
         )
         }

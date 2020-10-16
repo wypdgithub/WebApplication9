@@ -1,0 +1,960 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TKS直播系统 - 首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/Template/TKS5/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Template/TKS5/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Template/TKS5/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/Template/TKS5/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/Template/TKS5/css/zhutise.css" />
+    <script type="text/javascript" src="/Template/TKS5/js/jquery_1.11.3.min.js"></script>
+    <script type="text/javascript" src="/Template/TKS5/js/jquery.min.map"></script>
+    <script type="text/javascript" src="/Template/TKS5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Template/TKS5/js/touchSlider.js"></script>
+    <script src="/Template/TKS5/assets/js/mall.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div id="lineheader" style="height:20px;background-color:#4e91dc; display:none;"></div>
+    <div class="header-welcome bc-666 c-fff">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 hidden-xs col-sm-6">
+                    <!-- Carousel items -->
+                    <div class="item">
+                        <span>欢迎来到TKS网校系统</span>
+                    </div>
+                    <!-- Carousel nav -->
+                </div>
+                <div class="col-md-8 col-xs-12 col-sm-6" id="login_qian">
+                    <span class="pull-right">
+                        <span><i class="icon iconfont">&#xe642;</i></span> <span class="ml10"><a href="/Mall/Slogin.aspx">登录</a></span> <span class="ml10"><a href="/Mall/Sregister.aspx">马上注册</a></span> <span class="ml10">
+                            <i class="icon iconfont">
+                                &#xe644;
+                            </i>
+                        </span> <span class="ml10">我的购物车</span>
+                    </span>
+                </div>
+                <div class="col-md-8 col-xs-12 col-sm-6" id="login_hou" style="display:none;">
+                    <span class="pull-right">
+                        <span class="ml10"><i class="icon iconfont">&#xe642;</i><a href="/member/membercenter.aspx">个人中心</a></span> <span class="ml10">
+                            <i class="icon iconfont">
+                                &#xe644;
+                            </i>
+                        </span> <span class="ml10"><a href="/Mall/Order/Mall_ShoppingCart.aspx">我的购物车</a></span>
+                        <span><i class="icon iconfont">&#xe642;</i><a href="/Mall/Mall_HeadLoginStatus.ashx?id=1">退出</a></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default m0" role="navigation">
+        <div class="container">
+            <div class="navbar-header header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img id="NewStart-LOGO" src="/Template/tks5/Images/logo/logo.gif" style="margin-top:-10px;" alt="NewStart-LOGO"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/LiveTelecast/Live_TelecastList.aspx">直播</a></li>
+
+                    <li>
+                        <div class="scicon fl">
+                            <span class="iconfont">&#xe625;</span>
+                            <div class="headscbox">
+                                <div class="headsc">
+                                    <!--搜索-->
+
+                                    <div class="selSearch">
+                                        <div onMouseOut="drop_mouseout('head');" onClick="if(document.getElementById('headSel').style.display=='none'){document.getElementById('headSel').style.display='block';}else {document.getElementById('headSel').style.display='none';};return false;" id="headSlected" class="nowSearch">课程</div>
+                                        <div class="btnSel"><a onMouseOut="drop_mouseout('head');" onClick="if(document.getElementById('headSel').style.display=='none'){document.getElementById('headSel').style.display='block';}else {document.getElementById('headSel').style.display='none';};return false;" href="#"></a></div>
+
+                                        <div class="clear"></div>
+
+                                        <ul style="display: none;" id="headSel" class="selOption">
+                                            <li><a onMouseOut="drop_mouseout('head');" onMouseOver="drop_mouseover('head');" onClick="search_show('head','kc',this)" href="#">课程</a></li>
+                                            <li><a onMouseOut="drop_mouseout('head');" onMouseOver="drop_mouseover('head');" onClick="search_show('head','bj',this)" href="#">班级</a></li>
+                                            <li><a onMouseOut="drop_mouseout('head');" onMouseOver="drop_mouseover('head');" onClick="search_show('head','wd',this)" href="#">问答</a></li>
+                                            <!--<li><a onMouseOut="drop_mouseout('head');" onMouseOver="drop_mouseover('head');" onClick="search_show('head','1001',this)" href="#">试卷</a></li>-->
+                                            <li><a onMouseOut="drop_mouseout('head');" onMouseOver="drop_mouseover('head');" onClick="search_show('head','xw',this)" href="#">新闻</a></li>
+                                        </ul>
+                                    </div>
+                                    <input type="input" onKeyPress="getonKey();" placeholder="请输入关键字..." class="sctext" name="wd" style="font-size:13px;" id="key-text">
+                                    <input type="hidden" class="keywordte" value="kc" name="searchType" id="headSearchType">
+                                    <input type="button" align="left" class="scbtn" value="&nbsp;" onClick="dosearch();" name="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script type="text/javascript">
+        function drop_mouseover(pos) {
+            try { window.clearTimeout(timer); } catch (e) { }
+        }
+        function drop_mouseout(pos) {
+            var posSel = document.getElementById(pos + "Sel").style.display;
+            if (posSel == "block") {
+                timer = setTimeout("drop_hide('" + pos + "')", 1000);
+            }
+        }
+        function drop_hide(pos) { document.getElementById(pos + "Sel").style.display = "none"; }
+        function search_show(pos, searchType, href) {
+            document.getElementById(pos + "SearchType").value = searchType;
+            document.getElementById(pos + "Sel").style.display = "none";
+            document.getElementById(pos + "Slected").innerHTML = href.innerHTML;
+            var sE = document.getElementById("searchExtend");
+            if (sE != undefined && searchType == "bar") {
+                sE.style.display = "block";
+            } else if (sE != undefined) {
+                sE.style.display = "none";
+            }
+            try { window.clearTimeout(timer); } catch (e) { }
+            return false;
+        }
+        function dosearch() {
+            var key = jQuery("#key-text").val();
+            if (key == '' || key == '请输入搜索关键字') {
+                layer.confirm('请输入搜索关键字！', { btn: ['确定'] });  //按钮
+            }
+            else {
+                var m = jQuery("#headSearchType").val();
+                if (m == "kc") {   //问吧
+                    location.href = "/mall/mall_list.aspx?keywork=" + key;
+                } else if (m == "bj") { //考试
+                    location.href = "/Mall/Mall_ProductList.aspx?keyName=" + key;
+                } else if (m == "wd") {
+                    location.href = "/Mall/QA/QA_Index.aspx?keywork=" + key;
+                } else if (m == "xw") {
+                    location.href = "/Mall/Nlist.aspx?keywork=" + key;
+                }
+            }
+
+        }
+        jQuery(document).ready(function () {
+            if (jQuery("#key-text").val() == '') {
+                jQuery("#key-text").val('')
+            }
+        });
+
+
+        function getonKey() {
+            if (event.keyCode == 13) {
+                dosearch()
+            }
+        }
+        $(function () {
+            getAjax("/Mall/Mall_HeadLoginStatus.ashx", "id=2", function (rs) {
+                if (rs != "end") {
+                    $("#login_hou").show();
+                    $("#login_qian").hide();
+                }
+                else {
+                    $("#login_hou").hide();
+                    $("#login_qian").show();
+                }
+            });
+        });
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {         //移动终端浏览器版本信息
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    wp: u.indexOf('IEMobile') > -1, //是否wp
+                    symbianos: !!u.match(/SymbianOS.*/), //是否SymbianOS
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        $(function () {
+            if (browser.versions.ios) {
+                $("#lineheader").show();
+            }
+        });
+    </script>
+
+
+    <!--head结束-->
+
+    <div id="container">
+        <div class="banner">
+            <div class="container">
+                <img src="/Template/TKS5/images/banner1.png" class="img-responsive" />
+            </div>
+        </div>
+    </div>
+    <div class="container mt50 index-kecheng">
+        <div class="menu">
+            <ul class="c-tab-title1 nav nav-tabs" id="myTab">
+                <li class="active"><a href="#home" data-toggle="tab">精品课程</a></li>
+                <li><a href="#ios" data-toggle="tab">最新课程</a></li>
+                <li><a href="#jmeter" data-toggle="tab">人气课程</a></li>
+            </ul>
+        </div>
+        <div class="menudiv mt50">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ios">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="jmeter">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="col-xs-12 tac mt10 mb40">
+                    <div class="btn btn-default ">
+                        <a href="/Mall/Mall_list.aspx">查看更多课程 ></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bc-f4">
+        <div class="container">
+            <div class="mainbox pos maintitlebg">
+                <div class="xbg">
+                </div>
+                <h3>
+                    直播课程
+                </h3>
+            </div>
+            <div class="mainbox">
+                <div class="timeline-base-line" style="overflow: hidden;">
+                    <div class="header">
+                    </div>
+                    <div class="timeline-content">
+                        <ul style="width: 4064px; margin-left: -95px;">
+                            <li class="header" style="width: 150px;">
+                                <span data-index="0" class="radius-blue"></span>
+                            </li>
+                            <li class="node " style="width: 350px">
+                                <span class="radius-blue current" data-index="1"
+                                      data-spm-click="gostr=/aliyun;locaid=d1"></span>
+                                <div class="incident-time" style="opacity: 1; top: 40px; margin-left: -45px;">
+                                    <span class="bj-cheng c-fff zhibo-shijian">2016-07-15</span>
+                                </div>
+                            </li>
+                            <li class="node" style="width: 350px">
+                                <span class="radius-blue" data-index="2" data-spm-click="gostr=/aliyun;locaid=d2">
+                                </span>
+                                <div class="incident-time" style="opacity: 1; top: 40px; margin-left: -45px;">
+                                    <span class="bj-cheng c-fff zhibo-shijian">2016-07-16</span>
+                                </div>
+                            </li>
+                            <li class="node" style="width: 300px">
+                                <span class="radius-blue" data-index="3" data-spm-click="gostr=/aliyun;locaid=d3">
+                                </span>
+                                <div class="incident-time" style="opacity: 1; top: 40px; margin-left: -45px;">
+                                    <span class="bj-cheng c-fff zhibo-shijian">2016-07-17</span>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="lunbo">
+                        <div id="indemo">
+                            <div id="lunbo1" class="Livelunbo">
+                            </div>
+                            <div id="lunbo2" class="Livelunbo" style=" display:none;">
+                            </div>
+                            <div id="lunbo3" class="Livelunbo" style=" display:none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 tac mt50 mb40">
+                        <div class="btn btn-default">
+                            <a href="/LiveTelecast/Live_TelecastList.aspx">查看更多直播课程 ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="mainbox pos maintitlebg1">
+            <div class="xbg">
+            </div>
+            <h3>
+                学院动态
+            </h3>
+        </div>
+        <div class="mainbox1 row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="panel panel-default index-xydt">
+                    <div class="panel-heading ">
+                        <span class="fsize24 c-666">学员动态</span><span class="pull-right fsize24 c-666">
+                            <i class="icon iconfont" style="font-size: 26px;">&#xe600;</i>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>
+                                <div class="i-q-l-wrap">
+                                    <div class="pull-right width20 text-right">
+                                        <div class="">
+                                            <p class="c-666 ">
+                                                <i class="icon iconfont">&#xe63a;</i><span class="ml10">2016-07-14</span>
+                                            </p>
+                                        </div>
+                                        <div class="btn btn-default mt10 anniu">
+                                            <a href="/Mall/Mall_ProductInfo.aspx?id=5517ba45-2943-4a51-a2c1-54f4a0ddacc7">查看课程</a>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left width73">
+                                        <div class="">
+                                            <span class="fsize16 c-666">
+                                                <p>
+                                                    测试
+                                                </p>
+                                            </span>
+                                        </div>
+                                        <p class="dhxs">
+                                            <a href="#" class="c-master fsize16 c-666">开始学习《测试视频》</a>
+                                        </p>
+                                        <div class="i-q-l-txt">
+                                            <p>
+                                                <span class="c-999">
+                                                    老师很懒，该课件暂无描述~~~~~
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </li>
+                            <div class="xbg1">
+                            </div>
+                            <li>
+                                <div class="i-q-l-wrap">
+                                    <div class="pull-right width20 text-right">
+                                        <div class="">
+                                            <p class="c-666 ">
+                                                <i class="icon iconfont">&#xe63a;</i><span class="ml10">2016-07-14</span>
+                                            </p>
+                                        </div>
+                                        <div class="btn btn-default mt10 anniu">
+                                            <a href="/Mall/Mall_ProductInfo.aspx?id=5517ba45-2943-4a51-a2c1-54f4a0ddacc7">查看课程</a>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left width73">
+                                        <div class="">
+                                            <span class="fsize16 c-666">
+                                                <p>
+                                                    测试
+                                                </p>
+                                            </span>
+                                        </div>
+                                        <p class="dhxs">
+                                            <a href="#" class="c-master fsize16 c-666">开始学习《测试文档》</a>
+                                        </p>
+                                        <div class="i-q-l-txt">
+                                            <p>
+                                                <span class="c-999">
+                                                    老师很懒，该课件暂无描述~~~~~
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </li>
+                            <div class="xbg1">
+                            </div>
+                            <li>
+                                <div class="i-q-l-wrap">
+                                    <div class="pull-right width20 text-right">
+                                        <div class="">
+                                            <p class="c-666 ">
+                                                <i class="icon iconfont">&#xe63a;</i><span class="ml10">2016-07-12</span>
+                                            </p>
+                                        </div>
+                                        <div class="btn btn-default mt10 anniu">
+                                            <a href="/Mall/Mall_ProductInfo.aspx?id=">查看课程</a>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left width73">
+                                        <div class="">
+                                            <span class="fsize16 c-666">
+                                                <p>
+                                                    测试
+                                                </p>
+                                            </span>
+                                        </div>
+                                        <p class="dhxs">
+                                            <a href="#" class="c-master fsize16 c-666">开始学习《测试文档》</a>
+                                        </p>
+                                        <div class="i-q-l-txt">
+                                            <p>
+                                                <span class="c-999">
+                                                    老师很懒，该课件暂无描述~~~~~
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </li>
+                            <div class="xbg1">
+                            </div>
+                            <li>
+                                <div class="i-q-l-wrap">
+                                    <div class="pull-right width20 text-right">
+                                        <div class="">
+                                            <p class="c-666 ">
+                                                <i class="icon iconfont">&#xe63a;</i><span class="ml10">2016-07-12</span>
+                                            </p>
+                                        </div>
+                                        <div class="btn btn-default mt10 anniu">
+                                            <a href="/Mall/Mall_ProductInfo.aspx?id=">查看课程</a>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left width73">
+                                        <div class="">
+                                            <span class="fsize16 c-666">
+                                                <p>
+                                                    测试
+                                                </p>
+                                            </span>
+                                        </div>
+                                        <p class="dhxs">
+                                            <a href="#" class="c-master fsize16 c-666">开始学习《测试视频》</a>
+                                        </p>
+                                        <div class="i-q-l-txt">
+                                            <p>
+                                                <span class="c-999">
+                                                    老师很懒，该课件暂无描述~~~~~
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </li>
+                            <div class="xbg1">
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="panel panel-default index-xydt">
+                    <div class="panel-heading ">
+                        <span class="fsize24 c-666">学员互动</span><span class="pull-right fsize24 c-666">
+                            <a href="/Mall/QA/QA_Index.aspx">
+                                <i class="icon iconfont" style="font-size: 26px;">&#xe600;</i>
+                            </a>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bc-f4 mt50">
+        <div class="container">
+            <div class="mainbox pos maintitlebg">
+                <div class="xbg">
+                </div>
+                <h3>
+                    课程讲师
+                </h3>
+            </div>
+            <div class="mainbox2  mt20">
+                <div class="row">
+
+
+                    <div class="col-xs-12 tac mt10 mb40">
+                        <button class="btn btn-default">
+                            <a href="/Mall/Mall_Teacher.aspx">查看更多讲师></a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="mainbox pos maintitlebg1">
+            <div class="xbg">
+            </div>
+            <h3>
+                新闻资讯
+            </h3>
+        </div>
+        <div class="mainbox3">
+            <div class="row">
+
+
+
+                <div class="col-xs-12 tac mt20 mb40">
+                    <div class="btn btn-default ">
+                        <a href="/Mall/Nlist.aspx">查看更多资讯></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+
+                    <div class="logo c-ztcolor fsize18"><img id="NewStart-LOGO" src="/Template/tks5/Images/logo.png" alt="NewStart-LOGO"></div>
+                    <br />
+                    <p class="fsize12 "><strong>TKS网校是由新启科技自主研发的在线教育系统</strong></p>
+                    <p class="mt20 fsize12 ">北京新启科技是一家专业研发远程教育相关产品的技术服务类企业，由新启科技自主研发的主要八大系统等互联网教育相关的产品等。</p>
+                    <p class="mt50 fsize12 ">Powered By TKS 正式版 <a target="_blank" href="http://www.newstartsoft.com/"> www.newstartsoft.com</a></p>
+                    <p class="fsize12 "> 北京新启科技有限公司版权所有©2003-2016</p>
+                </div>
+
+                <div class="hidden-xs col-sm-6 col-md-8">
+                    <div class="row">
+                        <div class="hidden-xs col-sm-8 col-md-7">
+                            <div class="row yqlj" class="fsize14">
+                                <div class="col-xs-4">
+                                    <ul>
+                                        <li>产品介绍</li>
+                                        <li><a href="http://www.newstartsoft.com/home/Products" target="_blank">产品介绍</a></li>
+                                        <li><a href="http://www.newstartsoft.com/html/cooperation.html" target="_blank">加入我们</a></li>
+                                        <li><a href="http://www.newstartsoft.com/home/Products" target="_blank">功能说明</a></li>
+                                        <li><a href="http://www.newstartsoft.com/home/jiage" target="_blank">产品价格</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-4">
+                                    <ul>
+                                        <li>使用条款</li>
+                                        <li><a href="#">新手入门</a></li>
+                                        <li><a href="#">视频教程</a></li>
+
+                                    </ul>
+                                </div>
+                                <div class="col-xs-4">
+                                    <ul>
+                                        <li>关于学院</li>
+                                        <li><a href="http://www.newstartsoft.com/html/about.html" target="_blank">关于我们</a></li>
+                                        <li><a href="http://www.newstartsoft.com/Home/Page?key=e693652f-fdb3-47fc-a903-cf143452e3c8" target="_blank">动&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</a></li>
+                                        <li><a href="http://www.newstartsoft.com/html/Contact.html" target="_blank">联系我们</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="hidden-xs col-sm-4 col-md-offset-2 col-md-3">
+                            <ul class="lxwm">
+                                <li class="fsize16">联系我们</li>
+                                <li>
+                                    <span style="background: rgb(254, 195, 67) none repeat scroll 0px 0px; border-radius: 50%; text-align: center; display: block; float: left; margin-right: 10px; height: 40px; width: 40px;">
+                                        <span class="fa fa-phone" style="color: rgb(255, 255, 255); line-height: 40px; font-size: 26px;"></span>
+                                    </span>
+                                    <span style="line-height:45px">010-59142642</span>
+                                </li>
+                                <li>
+                                    <span style="background: rgb(78, 145, 219) none repeat scroll 0px 0px; border-radius: 50%; text-align: center; display: block; float: left; margin-right: 10px; height: 40px; width: 40px;">
+                                        <span class="fa fa-qq" style="color: rgb(255, 255, 255); line-height: 40px; font-size: 20px;"></span>
+                                    </span><span style="line-height:45px">在线客服</span>
+                                </li>
+                                <li id="weixinfooter">
+                                    <span style="background: #2fa813 none repeat scroll 0 0;border-radius: 50%;height:40px;width:40px;text-align: center;display: block;float:left;margin-right: 10px;">
+                                        <span style="color:#fff ;line-height: 40px;font-size:20px;" class="fa fa-weixin"></span>
+                                    </span><span style="line-height:45px">微信公众号</span>
+                                </li>
+                            </ul>
+                            <div style="display: none; top: 30px; right: 100px;text-align: center;transition: all 0.3s ease 0s;" class="weixinfooter-down">
+                                <a href="" target="_blank">
+                                    <img width="90" heiht="90" src="/Template/TKS5/images/weixin.gif" alt="微信" title="微信"><p>扫一扫关注</p>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12">
+                    <div class="linkmain tac fsize12 ">
+                        Copyright © 2003-2016 网校系统 TKS 5.1
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="kj-fixed" id="kj">
+            <p class="kj-icons" style="float: left;">
+
+                <a title="扫一扫，马上安装学习" class="fa fa-mobile" style="font-size: 35px;" id="appxz"></a>
+                <a title="电话 " class="fa fa-phone " id="weixin"></a>
+                <a title="qq " class="fa  fa-qq " id="qq"></a>
+                <a title="问题 " class="fa fa-question-circle " id="wenti"></a>
+                <a title="回到顶部 " class="fa fa-arrow-up " onclick="gotop()" id="hddb"></a>
+            </p>
+            <div class="weixin-down" style="display: none;float: left;top:31px; padding-bottom:20px;width:120px;">
+
+                <p style="text-align:center;" class="fsize16 c-555">总机电话</p>
+                <p class="c-666">010-59142640</p>
+                <p class="c-666">010-59142641</p>
+                <p class="c-666">010-59142642</p>
+                <p class="c-666">010-59142643</p>
+            </div>
+            <div class="app-down" style="display: none;float: left;">
+                <a target="_blank" href="">
+                    <img title="扫一扫，马上安装学习" src="/Template/TKS5/images/IOS.png" heiht="90" width="90"><p>IOS</p>
+                    <img title="扫一扫，马上安装学习" src="/Template/TKS5/images/Android.png" heiht="90" width="90"><p>Android</p>
+                </a>
+            </div>
+
+        </div>
+
+
+
+    </footer>
+    <script type="text/javascript" src="/Template/TKS5/js/jquery_1.11.3.min.js"></script>
+    <script src="/Themes/Scripts/FunctionJS.js" type="text/javascript"></script>
+    <script src="/Template/TKS5/layer/layer.js" type="text/javascript"></script>
+    <script src="/Template/TKS5/jquery-pjax-master/jquery.pjax.js" type="text/javascript"></script>
+    <script src="http://kf.edu-paas.com/Resources/WebJs/c7e4a7e1-2e0e-4960-993c-e0e5d23a0e98515d63a1-2e26-4efb-a832-5c6cb5efea8f.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+
+        $(function () {
+            var browser = {
+                versions: function () {
+                    var u = navigator.userAgent, app = navigator.appVersion;
+                    return {         //移动终端浏览器版本信息
+                        trident: u.indexOf('Trident') > -1, //IE内核
+                        presto: u.indexOf('Presto') > -1, //opera内核
+                        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                        iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                        iPad: u.indexOf('iPad') > -1, //是否iPad
+                        wp: u.indexOf('IEMobile') > -1, //是否wp
+                        symbianos: !!u.match(/SymbianOS.*/), //是否SymbianOS
+                        webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                    };
+                }(),
+                language: (navigator.browserLanguage || navigator.language).toLowerCase()
+            }
+            function fullwin() {
+                //不允许iframe嵌入
+                if (window.top !== window.self) { window.top.location = window.location; }
+
+                if (browser.versions.mobile || browser.versions.ios || browser.versions.android || browser.versions.symbianos || browser.versions.wp) {
+                    $(".kj-fixed").hide();
+                }
+            }
+            fullwin();
+            $('#appxz').hover(function () {
+                $(".app-down").show();
+            }, function () {
+                $(".app-down").hide();
+            });
+            $('#weixin').hover(function () {
+                $(".weixin-down").show();
+            }, function () {
+                $(".weixin-down").hide();
+            });
+            $('#weixinfooter').hover(function () {
+                $(".weixinfooter-down").show();
+            }, function () {
+                $(".weixinfooter-down").hide();
+            });
+
+
+
+            //宽度<1402时客户箭头消失
+            var _width = $(window).width();
+            if (_width < 1250) {
+                $(".prev").css("display", "none");
+                $(".next").css("display", "none");
+            }
+
+            $(".timeline-content").find(".node").click(function () {
+                $(".Livelunbo").hide();
+                $(this).addClass("current");
+                $(".timeline-content .node").find("span").removeClass("current");
+                $(this).find("span").addClass("current");
+                $("#indemo").children(":eq(" + ($(this).index() - 1) + ")").show();
+            });
+
+            try {
+                var browser = navigator.appName
+                var b_version = navigator.appVersion
+                var version = b_version.split(";");
+                var trim_Version = version[1].replace(/[ ]/g, "");
+
+                if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE6.0") {
+                    layer.confirm('浏览器版本过低，为了更好的体验，请使用<span style="color:red">IE9</span>以上浏览器或最新版 FireFox，Google Chrome！', {
+                        btn: ['确定'] //按钮
+                    });
+                }
+                else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE7.0") {
+                    layer.confirm('浏览器版本过低，为了更好的体验，请使用<span style="color:red">IE9</span>以上浏览器或最新版 FireFox，Google Chrome！', {
+                        btn: ['确定'] //按钮
+                    });
+                }
+                else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE8.0") {
+                    layer.confirm('浏览器版本过低，为了更好的体验，请使用<span style="color:red">IE9</span>以上浏览器或最新版 FireFox，Google Chrome！', {
+                        btn: ['确定'] //按钮
+                    });
+                }
+            } catch (e) {
+                console.log(e);
+            }
+            var lgname = getCookie("lgname");
+            var lgpwd = getCookie("lgpwd");
+            if (lgname != null && lgname != undefined && lgname != "") {
+                //当登录过，自动把名字填上
+                jQuery("#txtUserName").val(lgname);
+                jQuery("#txtUserPwd").val(lgpwd);
+            }
+            //回车键
+            document.onkeydown = function (e) {
+                if (!e) e = window.event; //火狐中是 window.event
+                if ((e.keyCode || e.which) == 13) {
+                    var obtnSearch = document.getElementById("Log_Submit")
+                    obtnSearch.focus(); //让另一个控件获得焦点就等于让文本输入框失去焦点
+                    obtnSearch.click();
+                }
+            }
+
+        });
+        //边框效果--移入
+        function biankuang(obj) {
+            var wh = $(obj).height() + 31;
+            var sh = $(obj).width() + 28;
+            $(obj).find('.biankuang_1').stop(true).animate({
+                height: wh
+            }, 300)
+            $(obj).find('.biankuang_2').stop(true).delay(300).animate({
+                width: sh
+            }, 300)
+            $(obj).find('.biankuang_3').stop(true).animate({
+                height: wh
+            }, 300)
+            $(obj).find('.biankuang_4').stop(true).delay(300).animate({
+                width: sh
+            }, 300)
+        }
+        //边框效果--移出
+        function biankuang1(obj) {
+            $(obj).find('.biankuang_1').stop(true).delay(100).animate({
+                height: '0px'
+            }, 100)
+            $(obj).find('.biankuang_2').stop(true).animate({
+                width: '0px'
+            }, 100)
+            $(obj).find('.biankuang_3').stop(true).delay(100).animate({
+                height: '0px'
+            }, 100)
+            $(obj).find('.biankuang_4').stop(true).animate({
+                width: '0px'
+            }, 100)
+        }
+        //触发
+        $('.spbq').hover(
+            function () {
+                var obj = $(this);
+                $(obj).find('.text_gobuy').addClass('text_gobuy_show');
+                $(obj).find('.search_y').animate({ left: '150', opacity: 1 }, 300);
+                biankuang(obj);
+            },
+            function () {
+                var obj = $(this);
+                $(obj).find('.text_gobuy').removeClass('text_gobuy_show');
+                $(obj).find('.search_y').animate({ left: '100', opacity: 0 }, 300);
+                biankuang1(obj);
+            });
+
+
+
+        function CheckingLogin(id) {
+            if (id == 1) {
+                jQuery("#Log_Submit").attr("disabled", true);
+                jQuery("#Log_Submit").html("登录中");
+                layer.load(1, {
+                    shade: [0.1, '#fff'] //0.1透明度的白色背景
+                });
+
+            } else {
+                layer.closeAll('loading');
+                jQuery("#Log_Submit").attr("disabled", false);
+                jQuery("#Log_Submit").html("登录");
+
+            }
+        }
+        function LoginBtn() {
+            var name = jQuery("#txtUserName").val();
+            var pwd = jQuery("#txtUserPwd").val();
+            var code = jQuery("#code").val();
+            if (name == "") {
+                layer.confirm('登录名不能为空', {
+                    btn: ['确定'] //按钮
+                });
+                jQuery("#txtUserName").focus();
+
+                return false;
+            } else if (pwd == "") {
+                layer.confirm('密码不能为空', {
+                    btn: ['确定'] //按钮
+                });
+                jQuery("#txtUserPwd").focus();
+                return false;
+            } else if (code == "") {
+                layer.confirm('验证码不能为空', {
+                    btn: ['确定'] //按钮
+                });
+                jQuery("#code").focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+        function CheckUserDataValid() {
+            if (!LoginBtn()) {
+                return false;
+            } else {
+                CheckingLogin(1);
+                var userName = jQuery("#txtUserName").val();
+                var userPwd = jQuery("#txtUserPwd").val();
+                var parm = '';
+                var url = '';
+                parm = 'action=login&user=' + escape(userName) + '|' + escape(userPwd);
+                url = '/Frame/Frame.ashx';
+                getAjax(url, parm, function (rs) {
+                    if (parseInt(rs) == 1) {
+                        jQuery("#txtCode").focus();
+                        layer.confirm('验证码输入不正确', {
+                            btn: ['确定'] //按钮
+                        });
+
+                        CheckingLogin(0);
+                        ToggleCode("Verify_codeImag", '/Ajax/Verify_code.ashx');
+                        return false;
+                    } else if (parseInt(rs) == 2) {
+                        layer.confirm('账户被锁,联系管理员', {
+                            btn: ['确定'] //按钮
+                        });
+                        CheckingLogin(0);
+                        return false;
+                    } else if (parseInt(rs) == 4) {
+                        layer.confirm('账户或密码有错误', {
+                            btn: ['确定'] //按钮
+                        });
+                        CheckingLogin(0);
+                        return false;
+                    } else if (parseInt(rs) == 3) {
+                        SetCookie("lgname", userName);
+                        SetCookie("lgpwd", userPwd);
+                        setTimeout(Load, 1000);
+                    } else {
+                        CheckingLogin(0);
+                        layer.confirm('服务器连接不上,联系管理员！', {
+                            btn: ['确定'] //按钮
+                        });
+                        window.location.href = window.location.href.replace('#', '');
+                        return false;
+                    }
+                });
+            }
+        }
+
+        //登陆加载
+        function Load() {
+            location.href = "/Member/MemberCenter.aspx"
+        }
+
+        function jsonDateFormat(jsonDate) {
+            try {
+                var date = new Date(parseInt(jsonDate.replace("/Date(", "").replace(")/", ""), 10));
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var seconds = date.getSeconds();
+                var milliseconds = date.getMilliseconds();
+                return date.getFullYear() + "-" + month + "-" + day;
+            } catch (ex) {
+                return "";
+            }
+        }
+
+        function gotop() {
+            // 到页面最顶层
+            $('html,body').animate({
+                scrollTop: 0 + 'px'
+            }, 400);
+        }
+
+        function Yusername() {
+            var un = jQuery("#user_name").val();
+            if (un != "") {
+                jQuery.get("/Member/YuserName.ashx", { u: un }, function (data) {
+                    if (data == "True") {
+                        b = true;
+                    }
+                    else {
+                        layer.confirm('登录账号已存在,请更换账号再试！', { btn: ['确定'] });
+                        jQuery("#user_name").val("");
+                    }
+                });
+            }
+        }
+        function yanzheng() {
+            if (jQuery("#user_pwd").val() != jQuery("#user_pwd1").val()) {
+                layer.confirm('您俩次输入的密码不一致，请重新输入', { btn: ['确定'] });
+                jQuery("#user_pwd").val("");
+                jQuery("#user_pwd1").val("");
+                jQuery("#user_pwd").focus();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>
