@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "CCC";
+}
+
+<h1>CCC</h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>layui在线调试</title>
+    <link href="~/js/layui.css" rel="stylesheet" />
+    <script src="~/js/layui.js"></script>
+    <style>
+        body {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <blockquote class="layui-elem-quote">
+        温馨提示：如果最左侧的导航的高度超出了你的屏幕，你可以将鼠标移入导航区域，然后滑动鼠标滚轮即可
+    </blockquote>
+
+   
+
+    <div id="pageDemo"></div>
+
+    <script src="//res.layui.com/static/lay/v1/build/layui.js"></script>
+    <script  type="text/babel">
+        layui.use(['layer', 'laypage', 'element'], function () {
+            var layer = layui.layer
+                , laypage = layui.laypage
+                , element = layui.element();
+
+            //向世界问个好
+            layer.msg('Hello World');
+
+            //监听Tab切换
+            element.on('tab(demo)', function (data) {
+                layer.msg('切换了：' + this.innerHTML);
+                console.log(data);
+            });
+
+            //分页
+            laypage({
+                cont: 'pageDemo' //分页容器的id
+                , pages: 100 //总页数
+                , skin: '#5FB878' //自定义选中色值
+                //,skip: true //开启跳页
+                , jump: function (obj, first) {
+                    if (!first) {
+                        layer.msg('第' + obj.curr + '页');
+                    }
+                }
+            });
+        });
+       
+    </script>
+</body>
+</html>

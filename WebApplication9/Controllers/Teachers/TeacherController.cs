@@ -31,5 +31,10 @@ namespace WebApplication9.Controllers.Teachers
             
             return View();
         }
+        public IActionResult CCC()
+        {
+
+            return View();
+        }
     }
 }

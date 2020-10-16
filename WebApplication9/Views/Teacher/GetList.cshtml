@@ -7,16 +7,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>React 实例</title>
+    <title>教师列表</title>
     <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
     <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
     <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
     <script src="~/js/layui.js"></script>
     <link href="~/js/layui.css" rel="stylesheet" />
+    <link href="~/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui-v2.5.6/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+    <script src="~/layui-v2.5.6/layui/layui.js"></script>
 </head>
 <body>
-
     <div id="cun"></div>
+       <div id="test1"></div>
     <script type="text/babel">
         class CrudComponent extends React.Component{
         constructor(props){
@@ -142,6 +145,16 @@
         }
         ReactDOM.render(
         <CrudComponent />,document.getElementById("cun"))
+
+        layui.use('laypage', function () {
+        var laypage = layui.laypage;
+
+        //执行一个laypage实例
+        laypage.render({
+        elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+        , count: 50 //数据总数，从服务端得到
+        });
+        });
     </script>
 </body>
 </html>

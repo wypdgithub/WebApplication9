@@ -8,12 +8,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ITAEM</title>
+    <title>修改教师信息</title>
     <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
     <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
     <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
     <script src="~/js/layui.js"></script>
     <link href="~/js/layui.css" rel="stylesheet" />
+    <link href="~/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui-v2.5.6/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
 </head>
 <body>
     <div id="cun"></div>
@@ -85,7 +87,7 @@
                         <hr className="layui-bg-green" />
 
                         <div className="layui-col-md1">
-                            <button id="btn2" className="layui-btn" onClick={this.updateUser.bind(this)}>
+                            <button id="btn2" class="layui-btn layui-btn-radius layui-btn-normal" onClick={this.updateUser.bind(this)}>
                                 <i className="layui-icon">&#xe642;</i>修改
                             </button>
                         </div>
