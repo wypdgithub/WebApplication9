@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewData["Title"] = "GetList";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>React 实例</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="~/js/layui.js"></script>
+    <link href="~/js/layui.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="cun"></div>
+    <script type="text/babel">
+        class CrudComponent extends React.Component{
+        constructor(props){
+        super(props)
+        this.state={
+        users:[]
+        }
+        }
+
+        getUserByUserName(){
+        const getUserByUserName="http://localhost:62023/api/Teacher/GetList?name="+this.text1.value
+        fetch(getUserByUserName,{method:"GET"})
+        .then(response=>response.json())
+        .then(data=>{
+        console.log(data)
+        this.setState({
+        users:data.virtualTbs
+        })
+        })
+        }
+
+        deleteUserById(id,teaName){
+        if(window.confirm("确定要删除 "+teaName+" 吗？")){
+        const heroesProps = this.props.user;
+        const getUserById="http://localhost:62023/api/Teacher/Del?id="+id
+        fetch(getUserById,{method:"delete"})
+        .then(response=>response.json())
+        .then(data=>{
+        console.log(data)
+        this.state.users=this.componentDidMount().data.virtualTbs
+        console.log(this.state.users)
+        this.setState({
+        users:this.state.users
+        })
+        if (data>0) {
+        alert("删除成功")
+        }
+
+        })
+        }
+
+        @*window.location.href="http://localhost:57251/Teacher/GetList"*@
+        }
+
+        componentDidMount () {// 在此方法中启动定时器/绑定监听/发送ajax请求
+        const getAllUsersUrl="http://localhost:62023/api/Teacher/GetList"
+        fetch(getAllUsersUrl,{method:"GET"})
+        .then(response=>response.json())
+        .then(data=>{
+        console.log(data.virtualTbs)
+        this.setState({
+        users:data.virtualTbs
+        })
+        })
+        }
+
+        addUser(){
+        window.location.href="http://localhost:57251/Teacher/Add"
+        }
+        //
+        updateUser(id){
+        window.location.href="http://localhost:57251/Teacher/UpdTeacher?id="+id
+        }
+
+        render(){
+        return (
+        <div>
+            <div className="layui-col-md1">
+                <input type="text" id="query" name="q" required lay-verify="required" placeholder="用户名" className="layui-input" ref={text1 =>this.text1=text1} />
+            </div>
+            <div className="layui-col-md1">
+                <button id="btn2" onClick={this.getUserByUserName.bind(this)} className="layui-btn">
+                    <i className="layui-icon">&#xe602;</i>搜索
+                </button>
+            </div>
+            <button className="layui-btn layui-btn-warm" onClick={this.addUser.bind(this)}>
+                <i className="layui-icon">&#xe654;</i> 添加教师
+            </button>
+            <button className="layui-btn layui-btn-danger" onClick={this.componentDidMount.bind(this)}>
+                <i className="layui-icon">&#xe640;</i>刷新
+            </button>
+            <table className="layui-table">
+                <thead>
+                    <tr>
+                        <th>教师名称</th>
+                        <th>教师头像</th>
+                        <th>机构名称</th>
+                        <th>排序号</th>
+                        <th>更新时间</th>
+                        <th>创建人</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                    this.state.users.map(
+                    (user,index) =>
+                    <tr key={user.id}>
+
+                        <td>{user.teaName}</td>
+                        @*<td>{user.teaImg}</td>*@
+                        <td><img src={user.teaImg} alt="" height="50" width="80" /></td>
+                        <td>{user.organizationName}</td>
+                        <td>{user.orderBy}</td>
+                        <td>{user.updTime}</td>
+                        <td>{user.createName}</td>
+                        <td>
+                            <button className="layui-btn layui-btn-normal" onClick={this.updateUser.bind(this,user.id)}>
+                                <i className="layui-icon">&#xe642;</i>编辑
+                            </button>
+                            <button className="layui-btn layui-btn-danger" onClick={this.deleteUserById.bind(this,user.id,user.teaName)}>
+                                <i className="layui-icon">&#xe640;</i>删除
+                            </button>
+                        </td>
+                    </tr>
+                    )
+                    }
+                </tbody>
+            </table>
+        </div>
+        )
+        }
+        }
+        ReactDOM.render(
+        <CrudComponent />,document.getElementById("cun"))
+    </script>
+</body>
+</html>
