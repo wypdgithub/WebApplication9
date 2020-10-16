@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "Show";
+}
+
+<script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+
+<h1>回收站</h1>
+<div ng-app="App" ng-controller="Doem">
+    <input type="text" placeholder="按课程名称模糊查询..." ng-model="chaxun" />
+    @*<input type="button" value="搜索" class="btn btn-info" ng-click="xian()"/>*@
+    <input type="button" value="课程管理" class="btn btn-dark" onclick="location.href='/CourseController1/Index'" />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>课程编号</td>
+                <td>课程名称</td>
+                <td>列表图</td>
+                <td>课程状态</td>
+                <td>优惠价</td>
+                <td>原价</td>
+                <td>更新时间</td>
+                <td>老师</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in datas |filter:{name:chaxun}">
+                <td>{{x.bian}}</td>
+                <td>{{x.name}}</td>
+                <td><img ng-src="{{x.image}}" style="width:50px;height:50px" /></td>
+                <td>{{::x.state=='1'?'上架':'下架'}}</td>
+                <td>{{x.original |currency:"¥:"}}</td>
+                <td>{{x.discounts |currency:"¥:"}}</td>
+                <td>{{x.newTime |date:"yyyy-MM-dd"}}</td>
+                <td>{{x.teaName}}</td>
+                <td>
+                    <input type="button" value="还原" class="btn btn-success" ng-click="upt(x.id)" />
+                    <input type="button" value="删除" class="btn btn-danger" ng-click="romove(x.id)" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    var arr = angular.module("App", []);
+    arr.controller("Doem", function ($scope, $http,$window) {
+        //获取数据
+        $http({
+            method: "GET",
+            url: "http://localhost:62023/api/Coures/Getcouse"
+        }).success(function (data) {
+            $scope.datas = data;
+        }).error(function (data) {
+
+        });
+        $scope.xian = function () {
+            var name = $scope.chaxun
+            $http.get('http://localhost:62023/api/Coures/Getcouse?name=' + name)
+                .then(function (response) {
+                    if (response.data > 0) {
+                        $scope.datas = response.data;
+                    }
+                });
+        };
+        //删除 
+        //$scope.romove = function (id) {
+        //    var index = 0;
+        //    for (var i in $scope.datas) {
+        //        if ($scope.datas[i].id == id) {
+        //            index = i;
+        //        }
+        //    }
+        //    var t = confirm("确定删除吗?")
+        //    if (t) {
+        //        $scope.datas.splice(i, 1);
+        //    }
+        //}
+        $scope.romove = function (id) {
+            var t = confirm("确定删除吗?")
+            if (t) {
+                $http.delete('http://localhost:62023/api/Coures/Delcouse?id=' + id)
+                    .then(function (response) {
+                        $scope.datas = response.data.sites;
+                        $window.location.href = '/CourseController1/Show';
+                    });
+            }
+          
+        }
+        $scope.upt = function (id) {
+            var t = confirm("确定还原吗?")
+            if (t) {
+                $http.post('http://localhost:62023/api/Coures/UptRecycle2?id=' + id)
+                    .then(function (response) {
+                        $scope.datas = response.data.sites;
+                        $window.location.href = '/CourseController1/Show';
+                    });
+            }
+
+        }
+    });
+</script>
+
