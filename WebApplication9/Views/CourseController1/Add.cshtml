@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+}
+
+<script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+<h1>新增课程</h1>
+
+<div ng-app="App" ng-controller="Doem">
+    <table class="table table-bordered">
+        <tr>
+            <td>课程名称</td>
+            <td><input type="text" ng-model="name" /></td>
+        </tr>
+        <tr>
+            <td>列表图</td>
+            <td>
+                <input type="file" name="fileDemo" id="fileDemo" multep />
+            </td>
+        </tr>
+        <tr>
+            <td>课程状态</td>
+            <td>
+                <input ng-model="Radio1" ng-click="GetRadi()" type="radio" value="1" name="sex" checked="checked" />上架
+                <input ng-model="Radio1" ng-click="GetRadi()" type="radio" value="2" name="sex" />下架
+            </td>
+        </tr>
+        <tr>
+            <td>讲师</td>
+            <td>
+                <select ng-model="pare">
+                    <option ng-repeat="x in teacher" value="{{x.id}}">{{x.teaName}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>原价</td>
+            <td><input type="text" ng-model="original" /></td>
+        </tr>
+        <tr>
+            <td>优惠价</td>
+            <td><input type="text" ng-model="discounts" /></td>
+        </tr>
+        <tr>
+            <td>排序号</td>
+            <td><input type="text" ng-model="bian" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="保存" class="btn btn-success" ng-click="Add()" /></td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var arr = angular.module("App", []);
+    arr.controller("Doem", function ($scope, $http, $window) {
+
+        $http({
+            method: "GET",
+            url: "http://localhost:62023/api/Coures/Getteacher"
+        }).success(function (data) {
+            $scope.teacher = data;
+        }).error(function (data) {
+        });
+
+        $scope.Add = function () {
+            var resultFile = document.getElementById("fileDemo").files[0];
+            var obj = {
+                bian: $scope.bian,
+                image: toString(resultFile),
+                name: $scope.name,
+                state: parseInt($scope.Radio1),
+                original: $scope.original,
+                discounts: $scope.discounts,
+                teacher: $scope.pare,
+            }
+            $http({
+                method: 'post',
+                contentType: 'application/json; charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify(obj),
+                url: 'http://localhost:62023/api/Coures/Addcoutse'
+            }).then(function (response) {
+                i = parseInt(response.data);
+                if (i > 0) {
+                    alert('添加成功');
+                    $window.location.href = '/CourseController1/Index';
+                }
+                else {
+                    alert('添加失败');
+                }
+            });
+        }
+    });
+</script>
